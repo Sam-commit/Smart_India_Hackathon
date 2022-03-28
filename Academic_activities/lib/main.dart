@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'widgets/categories.dart';
+import 'widgets/category1.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'functioning/networking.dart';
 import 'profile_page.dart';
+import 'widgets/category1.dart';
+import 'widgets/category2.dart';
+import 'widgets/category3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,9 +37,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<dynamic> hackathon_data = [];
+  List<dynamic> exams_data = [];
+  List<dynamic> scholarships_data = [];
+  List<dynamic> fest_data = [];
 
   Future<void> sol() async {
-    hackathon_data = await get_hackathons();
+    hackathon_data = await get_data("hackathons");
+    exams_data = await get_data("exams");
+    scholarships_data = await get_data("scholarships");
   }
 
   @override
@@ -146,14 +154,14 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   FaIcon(
-                    FontAwesomeIcons.briefcase,
+                    FontAwesomeIcons.scroll,
                     color: Colors.white,
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
-                    "Internships",
+                    "Exams",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -281,6 +289,16 @@ class _HomePageState extends State<HomePage> {
                   Categories(
                     name: "Hackathons",
                     data: hackathon_data,
+                  ),
+
+                  Category2(
+                    name: "Exams",
+                    data: exams_data,
+                  ),
+
+                  Category3(
+                    name: "Scholarships",
+                    data: scholarships_data,
                   ),
                 ],
               );

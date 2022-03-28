@@ -5,15 +5,15 @@ import 'package:http/http.dart' as http;
 
 const String url ="https://clumsy-coders-sih.herokuapp.com/";
 
-Future get_hackathons()async{
+Future get_data(String name)async{
 
-  List<dynamic>hackathon_data;
+  List<dynamic>data;
 
   print("Hello");
-  http.Response response =await  http.get(Uri.parse("https://clumsy-coders-sih.herokuapp.com/hackathons/getAll"));
+  http.Response response =await  http.get(Uri.parse("https://clumsy-coders-sih.herokuapp.com/$name/getAll"));
   print(response.statusCode);
   print(response.body);
 
-  return hackathon_data = jsonDecode(response.body);
+  return data = jsonDecode(response.body);
 
 }
