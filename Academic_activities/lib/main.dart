@@ -1,3 +1,6 @@
+
+import 'package:academic_activities/screens/event_details.dart';
+
 import 'package:academic_activities/screens/chat_screen.dart';
 import 'package:academic_activities/screens/details.dart';
 import 'package:academic_activities/screens/log_in.dart';
@@ -13,8 +16,15 @@ import 'screens/chat_screen.dart';
 import 'widgets/category1.dart';
 import 'widgets/category2.dart';
 import 'widgets/category3.dart';
+import 'widgets/category4.dart';
+
+import 'screens/event_details.dart';
+
+
 import 'screens/profile_page.dart';
 import 'functioning/networking.dart';
+
+
 void main() {
   runApp(const MyApp());
 }
@@ -96,6 +106,7 @@ class _HomePageState extends State<HomePage> {
     hackathon_data = await get_data("hackathons");
     exams_data = await get_data("exams");
     scholarships_data = await get_data("scholarships");
+    fest_data = await get_data("techFests");
   }
 
   @override
@@ -371,6 +382,7 @@ class _HomePageState extends State<HomePage> {
                     name: "Scholarships",
                     data: scholarships_data,
                   ),
+                  Category4(name: "TechFests", data: fest_data)
                 ],
               );
 

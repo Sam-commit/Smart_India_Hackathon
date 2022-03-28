@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:academic_activities/functioning/networking.dart';
+import 'package:academic_activities/screens/event_details.dart';
 
 class MyCard_Hackathon extends StatelessWidget {
 
@@ -13,7 +14,7 @@ class MyCard_Hackathon extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: (){
-
+            Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(data: data,)));
         },
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
