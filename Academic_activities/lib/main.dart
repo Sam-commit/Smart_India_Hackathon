@@ -4,6 +4,7 @@ import 'widgets/categories.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'functioning/networking.dart';
 import 'profile_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -16,10 +17,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: HomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomePage(),
     );
   }
 }
@@ -34,15 +35,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<dynamic> hackathon_data = [];
 
-  void sol() async {
+  Future<void> sol() async {
     hackathon_data = await get_hackathons();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    sol();
   }
 
   @override
@@ -278,13 +272,29 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: ListView(
-        children: [
-          Categories(
-            name: "Hackathons",
-            data: hackathon_data,
-          )
-        ],
+      body: FutureBuilder(
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+
+              return ListView(
+                children: [
+                  Categories(
+                    name: "Hackathons",
+                    data: hackathon_data,
+                  ),
+                ],
+              );
+
+          }
+
+          print(snapshot.connectionState);
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+
+
+        },
+        future: sol(),
       ),
     );
   }
