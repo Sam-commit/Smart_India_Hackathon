@@ -10,15 +10,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int currentIndex=0;
-  final screens = [
-    HomePage(),
-    ProfilePage(),
 
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF5264C6),
+        child: FaIcon(FontAwesomeIcons.edit),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ), onPressed: () {  },
+      ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
@@ -71,11 +73,13 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Samarth Goel")),
+            child: Center(child: Text("Samarth Goel",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
+
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: Center(child: Text("Btech in IIITA")),
+            child: Center(child: Text("Btech in IIITA",style: TextStyle(fontSize: 20),)),
           ),
 
           Padding(
@@ -83,37 +87,42 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Text("Personal Info"),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+            padding: const EdgeInsets.only(left: 10,right: 10),
+            child: Column(
               children: [
-                FaIcon(FontAwesomeIcons.user,color: Colors.blue,),
-                Text("Samarth Goel"),
+                ListTile(
+                  leading:FaIcon(FontAwesomeIcons.user,color: Colors.blue,),
+                    title: Text("Samarth Goel"),
+                ),
+                ListTile(
+                  leading:FaIcon(FontAwesomeIcons.envelope,color: Colors.blue,),
+                  title: Text("samarth@gmail.com"),
+                ), ListTile(
+                  leading:FaIcon(FontAwesomeIcons.phone,color: Colors.blue,),
+                  title: Text("+91 1234567890"),
+                ), ListTile(
+                  leading:Icon(Icons.male,color: Colors.blue,size: 35,),
+                  title: Text("Male"),
+                ), ListTile(
+                  leading:FaIcon(FontAwesomeIcons.graduationCap,color: Colors.blue,),
+                  title: Text("B.Tech in Information Technology at IIITA"),
+                ),
               ],
             ),
-          )
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Row(
+          //     children: [
+          //       FaIcon(FontAwesomeIcons.user,color: Colors.blue,),
+          //       Text("Samarth Goel"),
+          //     ],
+          //   ),
+          // )
 
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 28,
-        currentIndex: currentIndex,
-        onTap: (index){
-          setState(() {
-            currentIndex=index;
-          });
-        },
-        type: BottomNavigationBarType.fixed, // Fixed
-        selectedItemColor: Colors.white,
-        backgroundColor: Color(0xFF738AFF),
-        items: [
-          BottomNavigationBarItem(label: " ", icon: Icon(FontAwesomeIcons.home,)),
-          BottomNavigationBarItem(label:" ",icon: Icon(FontAwesomeIcons.headset)),
-          BottomNavigationBarItem( label:" ", icon: Icon(FontAwesomeIcons.bookmark)),
-          BottomNavigationBarItem(label:" ",icon: Icon(FontAwesomeIcons.user)),
 
-
-        ],
-      ),
     );
   }
 }

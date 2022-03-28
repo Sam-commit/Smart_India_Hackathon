@@ -1,88 +1,14 @@
-import 'package:academic_activities/screens/chat_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'widgets/categories.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'functioning/networking.dart';
-import 'screens/profile_page.dart';
-import 'screens/chat_screen.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MainPage(),
-    );
-  }
-}
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _MainPageState extends State<MainPage> {
-  int currentIndex=0;
-  final screens = [
-    HomePage(),
-    ChatScreen(),
-    ProfilePage(),
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: screens[currentIndex],
-
-      bottomNavigationBar: BottomNavigationBar(
-      iconSize: 28,
-      currentIndex: currentIndex,
-      onTap: (index){
-        setState(() {
-          currentIndex=index;
-        });
-      },
-      type: BottomNavigationBarType.fixed, // Fixed
-      selectedItemColor: Colors.white,
-      backgroundColor: Color(0xFF738AFF),
-      items: [
-        BottomNavigationBarItem(label: " ", icon: Icon(FontAwesomeIcons.home,)),
-        BottomNavigationBarItem(label:" ",icon: Icon(FontAwesomeIcons.headset)),
-        // BottomNavigationBarItem( label:" ", icon: Icon(FontAwesomeIcons.bookmark)),
-        BottomNavigationBarItem(label:" ",icon: Icon(FontAwesomeIcons.user)),
-
-
-      ],
-    ),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  List<dynamic> hackathon_data = [];
-
-  Future<void> sol() async {
-    hackathon_data = await get_hackathons();
-  }
-
+class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -296,7 +222,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-          "Home",
+          "Support",
           style: TextStyle(color: Colors.black),
         ),
         elevation: 0,
@@ -316,31 +242,37 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: FutureBuilder(
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+     body: Padding(
+       padding: const EdgeInsets.only(left: 18,right: 18,top: 10,bottom: 8),
+       child: Container(
+         decoration: BoxDecoration(
+             color: Color(0xFFE0E5FF),
 
-              return ListView(
-                children: [
-                  Categories(
-                    name: "Hackathons",
-                    data: hackathon_data,
-                  ),
-                ],
-              );
-
-          }
-
-          print(snapshot.connectionState);
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-
-
-        },
-        future: sol(),
-      ),
-
+             borderRadius: BorderRadius.circular(12)
+         ),
+       ),
+     ),
+     bottomNavigationBar: TextFormField(
+       decoration: InputDecoration(
+         prefixIcon: Padding(
+           padding: const EdgeInsets.all(8.0),
+           child: Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             // mainAxisSize: MainAxisSize.min,
+             children: [Text("Message..."),Icon(Icons.send)],
+           ),
+         ),
+         focusedBorder: OutlineInputBorder(
+           borderSide: BorderSide(
+             color: Colors.grey,
+             width: 1,
+           ),
+         ),
+         enabledBorder: OutlineInputBorder(
+           borderSide: BorderSide(color: Colors.grey, width: 1),
+         ),
+       ),
+     ),
     );
   }
 }
