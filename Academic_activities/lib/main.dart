@@ -1,3 +1,4 @@
+import 'package:academic_activities/screens/event_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'widgets/category1.dart';
@@ -7,6 +8,7 @@ import 'profile_page.dart';
 import 'widgets/category1.dart';
 import 'widgets/category2.dart';
 import 'widgets/category3.dart';
+import 'screens/event_details.dart';
 
 void main() {
   runApp(const MyApp());
