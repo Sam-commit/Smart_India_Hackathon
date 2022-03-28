@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:academic_activities/functioning/networking.dart';
 
-class MyCard extends StatelessWidget {
+class MyCard_Hackathon extends StatelessWidget {
 
-  MyCard({required this.data});
+  MyCard_Hackathon({required this.data});
 
   Map<dynamic,dynamic>data;
 
@@ -12,9 +12,8 @@ class MyCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: ()async{
-          print("Hello");
-          await get_hackathons();
+        onTap: (){
+
         },
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
