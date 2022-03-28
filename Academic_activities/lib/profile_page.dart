@@ -1,3 +1,4 @@
+import 'package:academic_activities/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -9,6 +10,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  int currentIndex=0;
+  final screens = [
+    HomePage(),
+    ProfilePage(),
+
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,6 +91,26 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           )
+
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 28,
+        currentIndex: currentIndex,
+        onTap: (index){
+          setState(() {
+            currentIndex=index;
+          });
+        },
+        type: BottomNavigationBarType.fixed, // Fixed
+        selectedItemColor: Colors.white,
+        backgroundColor: Color(0xFF738AFF),
+        items: [
+          BottomNavigationBarItem(label: " ", icon: Icon(FontAwesomeIcons.home,)),
+          BottomNavigationBarItem(label:" ",icon: Icon(FontAwesomeIcons.headset)),
+          BottomNavigationBarItem( label:" ", icon: Icon(FontAwesomeIcons.bookmark)),
+          BottomNavigationBarItem(label:" ",icon: Icon(FontAwesomeIcons.user)),
+
 
         ],
       ),
