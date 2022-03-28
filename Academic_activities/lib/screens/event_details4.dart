@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EventPage extends StatefulWidget {
-  EventPage({required this.data});
+class EventPage_Techfest extends StatefulWidget {
+  EventPage_Techfest({required this.data});
 
   Map<dynamic, dynamic> data;
 
   @override
-  _EventPageState createState() => _EventPageState();
+  _EventPage_TechfestState createState() => _EventPage_TechfestState();
 }
 
-class _EventPageState extends State<EventPage> {
+class _EventPage_TechfestState extends State<EventPage_Techfest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _EventPageState extends State<EventPage> {
                     bottom: MediaQuery.of(context).size.width / 8),
                 decoration: BoxDecoration(
                     color: Color(0xFF5264C6),
-                  image: DecorationImage(image: AssetImage("images/img2.jpg"),fit: BoxFit.fill)
+                    image: DecorationImage(image: AssetImage("images/img2.jpg"),fit: BoxFit.fill)
                 ),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 3.5,
@@ -51,16 +51,16 @@ class _EventPageState extends State<EventPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            child: Center(child: Text("Overview Of The Hackathon",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
+            child: Center(child: Text("Overview Of The TechFest",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
           ),
-          
+
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFF6981FF).withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(30)
+                    color: Color(0xFF6981FF).withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(30)
                 ),
                 child: Column(
                   children: [
@@ -75,14 +75,14 @@ class _EventPageState extends State<EventPage> {
                               children: [
                                 FaIcon(FontAwesomeIcons.calendar),
                                 SizedBox(width: 10,),
-                                Text("Registration Deadline"),
+                                Text("Registration Start Date"),
 
                               ],
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 10,top: 10),
-                            child: Text(widget.data["hackathonRegEndDate"]),
+                            child: Text(widget.data["techFestRegStartDate"]),
                           )
                         ],
                       ),
@@ -98,14 +98,14 @@ class _EventPageState extends State<EventPage> {
                               children: [
                                 FaIcon(FontAwesomeIcons.user),
                                 SizedBox(width: 10,),
-                                Text("Min Team Size"),
+                                Text("Registration Deadline"),
 
                               ],
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(right: 80,top: 10),
-                            child: Text(widget.data["minTeamSize"].toString()),
+                            padding: const EdgeInsets.only(right: 10,top: 10),
+                            child: Text(widget.data["techFestRegEndDate"].toString()),
                           )
                         ],
                       ),
@@ -121,14 +121,14 @@ class _EventPageState extends State<EventPage> {
                               children: [
                                 FaIcon(FontAwesomeIcons.peopleGroup),
                                 SizedBox(width: 10,),
-                                Text("Max Team Size"),
+                                Text("Eligibility "),
 
                               ],
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(right: 80,top: 10),
-                            child: Text(widget.data["maxTeamSize"].toString()),
+                            padding: const EdgeInsets.only(right: 10,top: 10),
+                            child: Text(widget.data["eligibilityCriteria"].toString()),
                           )
                         ],
                       ),
@@ -144,37 +144,14 @@ class _EventPageState extends State<EventPage> {
                               children: [
                                 FaIcon(FontAwesomeIcons.clock),
                                 SizedBox(width: 10,),
-                                Text("Start Date"),
+                                Text("TechFest Fee "),
 
                               ],
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 10,top: 10),
-                            child: Text(widget.data["hackathonStartDate"]),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10,top: 10),
-                            child: Row(
-                              children: [
-                                FaIcon(FontAwesomeIcons.clock ),
-                                SizedBox(width: 10,),
-                                Text("End date"),
-
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10,top: 10),
-                            child: Text(widget.data["hackathonEndDate"]),
+                            child: Text(widget.data["techFestFee"].toString()),
                           )
                         ],
                       ),
@@ -188,7 +165,7 @@ class _EventPageState extends State<EventPage> {
             padding: const EdgeInsets.only(left: 17,right: 10,bottom: 10),
             child: ElevatedButton(onPressed: ()async{
 
-                  await launch(widget.data["hackathonLink"]);
+              await launch(widget.data["techFestLink"]);
 
             },
                 style: ButtonStyle(

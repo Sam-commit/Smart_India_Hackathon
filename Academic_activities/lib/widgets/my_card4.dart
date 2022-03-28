@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:academic_activities/functioning/networking.dart';
-import 'package:academic_activities/screens/event_details3.dart';
+import 'package:academic_activities/screens/event_details4.dart';
 
-class MyCard_Scholarships extends StatelessWidget {
+class MyCard_Techfests extends StatelessWidget {
 
-  MyCard_Scholarships({required this.data});
+  MyCard_Techfests({required this.data});
 
   Map<dynamic,dynamic>data;
 
@@ -14,7 +14,7 @@ class MyCard_Scholarships extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>EventPage_Scholarships(data: data)));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>EventPage_Techfest(data: data)) );
         },
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
@@ -75,7 +75,7 @@ class MyCard_Scholarships extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(data["name"],style: TextStyle(fontWeight: FontWeight.bold),),
-                            Text("For :- " + data["eligibilityCriteria"]),
+                            Text("For :- " + data["techFestRegEndDate"]),
                             SizedBox(height: 10,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
