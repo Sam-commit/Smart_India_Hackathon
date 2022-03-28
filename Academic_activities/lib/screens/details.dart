@@ -1,8 +1,12 @@
+import 'package:academic_activities/main.dart';
+import 'package:academic_activities/screens/log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:academic_activities/functioning/networking.dart';
 class Details extends StatefulWidget {
-  const Details({Key? key}) : super(key: key);
+  final String name,email,password;
+  const Details({Key? key, required this.name, required this.email, required this.password}) : super(key: key);
+
 
   @override
   State<Details> createState() => _DetailsState();
@@ -12,6 +16,7 @@ class _DetailsState extends State<Details> {
 
 
    String? _chosenValue;
+    String gender='Gender',education='Education',contact=' ',age=' ';
 
 
   @override
@@ -48,6 +53,10 @@ class _DetailsState extends State<Details> {
             Padding(
               padding: const EdgeInsets.only(top: 30,bottom: 10),
               child: TextField(
+                onChanged: (text)
+                {
+                  contact=text;
+                },
                 decoration: InputDecoration(
                   fillColor: Color(0xFFE0E5FF),
                   filled: true,
@@ -61,7 +70,10 @@ class _DetailsState extends State<Details> {
             Padding(
               padding: const EdgeInsets.only(top: 15,bottom: 10),
               child: TextField(
-                
+                onChanged: (text)
+                {
+                  age=text;
+                },
                 decoration: InputDecoration(
                   fillColor: Color(0xFFE0E5FF),
                   filled: true,
@@ -69,37 +81,10 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(12)
                   ),
                   hintText: '  Age',
-                  suffixIcon: Container(
-                    width: MediaQuery.of(context).size.width/4.8,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF6981FF),
-                                borderRadius: BorderRadius.circular(5)
-                              ),
-                              child: IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.add,color: Colors.white,size: 15,))),
-                          SizedBox(width: 5),
-                          Container(
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                  color: Color(0xFF6981FF),
-                                  borderRadius: BorderRadius.circular(5)
-                              ),
-                              child: IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.minus,color: Colors.white,size: 15,))),
-
-                        ],
-                      ),
-                    ),
-                  )
                 ),
               ),
-            ),Padding(
+            ),
+            Padding(
               padding: const EdgeInsets.only(top: 15,bottom: 10),
               child: DecoratedBox(
 
@@ -112,6 +97,7 @@ class _DetailsState extends State<Details> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15,top: 8,bottom: 8,right: 8),
                   child: DropdownButton<String>(
+
 
                     isExpanded: true,
                     focusColor:Colors.white,
@@ -132,7 +118,7 @@ class _DetailsState extends State<Details> {
                       );
                     }).toList(),
                     hint:Text(
-                      'Gender',
+                      '$gender',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -140,7 +126,7 @@ class _DetailsState extends State<Details> {
                     ),
                     onChanged: (String? value) {
                       setState(() {
-                        _chosenValue = value;
+                        gender = value!;
                       });
                     },
                   ),
@@ -180,15 +166,16 @@ class _DetailsState extends State<Details> {
                       );
                     }).toList(),
                     hint:Text(
-                      'Education',
+                      '$education',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                       ),
                     ),
+
                     onChanged: (String? value) {
                       setState(() {
-                        _chosenValue = value;
+                        education = value!;
                       });
                     },
                   ),
@@ -202,7 +189,10 @@ class _DetailsState extends State<Details> {
             SizedBox(
               height: 15,
             ),
-            ElevatedButton(onPressed: (){},
+            ElevatedButton(onPressed: ()async{
+              await sign_up(widget.name,  age, gender, contact, widget.password, education, widget.email);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
+            },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -227,7 +217,7 @@ class _DetailsState extends State<Details> {
 
                 Text("Already have an account?",style: TextStyle(color: Colors.black),),
                 TextButton( onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LogIn()));
                 },
                   child: Text("Sign in")
                   ,),

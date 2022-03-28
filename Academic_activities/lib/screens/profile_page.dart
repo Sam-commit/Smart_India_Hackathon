@@ -1,7 +1,7 @@
 import 'package:academic_activities/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:academic_activities/functioning/networking.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -10,6 +10,13 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  @override
+  var data;
+
+  Future<void> getP() async {
+  data = await getUserProfile();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,84 +51,101 @@ class _ProfilePageState extends State<ProfilePage> {
           )
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.width/8),
-                decoration: BoxDecoration(
-                    color: Color(0xFF5264C6),
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(30),
-                        bottomLeft: Radius.circular(30))),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 6,
-              ),
-              Positioned(
-                top: MediaQuery.of(context).size.height/11,
+      body: FutureBuilder(
+        builder: (context,snapshot)
+            {
+              if(snapshot.connectionState==ConnectionState.done)
+                {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        clipBehavior: Clip.none,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.width/8),
+                            decoration: BoxDecoration(
+                                color: Color(0xFF5264C6),
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(30),
+                                    bottomLeft: Radius.circular(30))),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height / 6,
+                          ),
+                          Positioned(
+                            top: MediaQuery.of(context).size.height/11,
 
-                child: CircleAvatar(
-                  radius: MediaQuery.of(context).size.width/8,
-                  backgroundImage: AssetImage("images/img.jpg"),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Samarth Goel",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
+                            child: CircleAvatar(
+                              radius: MediaQuery.of(context).size.width/8,
+                              backgroundImage: AssetImage("images/img.jpg"),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: Text("${data["name"]}",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
 
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Center(child: Text("Btech in IIITA",style: TextStyle(fontSize: 20),)),
-          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Center(child: Text("${data["education"]}",style: TextStyle(fontSize: 20),)),
+                      ),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
-            child: Text("Personal Info"),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10),
-            child: Column(
-              children: [
-                ListTile(
-                  leading:FaIcon(FontAwesomeIcons.user,color: Colors.blue,),
-                    title: Text("Samarth Goel"),
-                ),
-                ListTile(
-                  leading:FaIcon(FontAwesomeIcons.envelope,color: Colors.blue,),
-                  title: Text("samarth@gmail.com"),
-                ), ListTile(
-                  leading:FaIcon(FontAwesomeIcons.phone,color: Colors.blue,),
-                  title: Text("+91 1234567890"),
-                ), ListTile(
-                  leading:Icon(Icons.male,color: Colors.blue,size: 35,),
-                  title: Text("Male"),
-                ), ListTile(
-                  leading:FaIcon(FontAwesomeIcons.graduationCap,color: Colors.blue,),
-                  title: Text("B.Tech in Information Technology at IIITA"),
-                ),
-              ],
-            ),
-          ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     children: [
-          //       FaIcon(FontAwesomeIcons.user,color: Colors.blue,),
-          //       Text("Samarth Goel"),
-          //     ],
-          //   ),
-          // )
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+                        child: Text("Personal Info"),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10,right: 10),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              leading:FaIcon(FontAwesomeIcons.user,color: Colors.blue,),
+                              title: Text("${data["name"]}"),
+                            ),
+                            ListTile(
+                              leading:FaIcon(FontAwesomeIcons.envelope,color: Colors.blue,),
+                              title: Text("${data["email"]}"),
+                            ), ListTile(
+                              leading:FaIcon(FontAwesomeIcons.phone,color: Colors.blue,),
+                              title: Text("${data["contactNo"]}"),
+                            ), ListTile(
+                              leading:Icon(Icons.male,color: Colors.blue,size: 35,),
+                              title: Text("${data["gender"]}"),
+                            ), ListTile(
+                              leading:FaIcon(FontAwesomeIcons.graduationCap,color: Colors.blue,),
+                              title: Text("${data["education"]}"),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Row(
+                      //     children: [
+                      //       FaIcon(FontAwesomeIcons.user,color: Colors.blue,),
+                      //       Text("Samarth Goel"),
+                      //     ],
+                      //   ),
+                      // )
 
-        ],
-      ),
+                    ],
+                  );
+                }
+
+              print(snapshot.connectionState);
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+
+
+            },
+          future: getP(),
+
+    ),
 
     );
   }

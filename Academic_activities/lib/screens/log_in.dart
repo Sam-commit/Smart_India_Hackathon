@@ -1,6 +1,8 @@
+import 'package:academic_activities/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'sign_up.dart';
+import 'package:academic_activities/functioning/networking.dart';
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
 
@@ -9,6 +11,7 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  String email=' ',password=' ';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,19 +49,27 @@ class _LogInState extends State<LogIn> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: TextField(
+                  onChanged: (text)
+                  {
+                    email=text;
+                  },
                   decoration: InputDecoration(
                     fillColor: Color(0xFFE0E5FF),
                     filled: true,
                     border: OutlineInputBorder(
                      borderRadius: BorderRadius.circular(12)
                     ),
-                    hintText: '   Enter Username',
+                    hintText: '   Enter Email',
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: TextField(
+                  onChanged: (text)
+                  {
+                    password=text;
+                  },
                   decoration: InputDecoration(
                     fillColor: Color(0xFFE0E5FF),
                     filled: true,
@@ -75,7 +86,10 @@ class _LogInState extends State<LogIn> {
               SizedBox(
                 height: 30,
               ),
-             ElevatedButton(onPressed: (){},
+             ElevatedButton(onPressed: ()async{
+              await log_in(email,password);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage()));
+             },
                  style: ButtonStyle(
                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                          RoundedRectangleBorder(
@@ -118,7 +132,9 @@ class _LogInState extends State<LogIn> {
               SizedBox(
                 height: 20,
               ),
-              ElevatedButton(onPressed: (){},
+              ElevatedButton(onPressed: (){
+
+              },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(

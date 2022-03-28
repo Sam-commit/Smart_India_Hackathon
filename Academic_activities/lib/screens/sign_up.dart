@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:academic_activities/screens/details.dart';
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -8,6 +9,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+    String name='',email='',password='',cpass='';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +45,10 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.only(top: 30,bottom: 10),
                 child: TextField(
+                  onChanged: (text){
+                    name=text;
+                    print(text);
+                  },
                   decoration: InputDecoration(
                     fillColor: Color(0xFFE0E5FF),
                     filled: true,
@@ -55,6 +62,11 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.only(top: 15,bottom: 10),
                 child: TextField(
+
+                  onChanged: (text){
+                    email=text;
+                    print(text);
+                  },
                   decoration: InputDecoration(
                     fillColor: Color(0xFFE0E5FF),
                     filled: true,
@@ -64,9 +76,15 @@ class _SignUpState extends State<SignUp> {
                     hintText: '  Email',
                   ),
                 ),
-              ),Padding(
+              ),
+              Padding(
                 padding: const EdgeInsets.only(top: 15,bottom: 10),
                 child: TextField(
+                  onChanged: (text){
+                    password=text;
+                    print(text);
+                  },
+                  obscureText: true,
                   decoration: InputDecoration(
                     fillColor: Color(0xFFE0E5FF),
                     filled: true,
@@ -77,11 +95,16 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.only(top: 15,bottom: 20),
                 child: TextField(
+                  onChanged: (value ){
+                      cpass = value;
+                  },
                   decoration: InputDecoration(
                     fillColor: Color(0xFFE0E5FF),
+
                     filled: true,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12)
@@ -91,13 +114,17 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
+              Text((password == cpass ) ? "" : "Confirm password doesn't match",style: TextStyle(color: Colors.red),),
+
               // TextButton(onPressed: (){}, child: Text("Forgot Password?",style: TextStyle(
               //   color: Colors.grey.shade600,
               // ),)),
              SizedBox(
                height: 15,
              ),
-              ElevatedButton(onPressed: (){},
+              ElevatedButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Details(name: name,email: email,password: password,) ));
+              },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(

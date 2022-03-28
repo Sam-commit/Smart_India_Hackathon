@@ -1,4 +1,7 @@
 import 'package:academic_activities/screens/chat_screen.dart';
+import 'package:academic_activities/screens/details.dart';
+import 'package:academic_activities/screens/log_in.dart';
+import 'package:academic_activities/screens/sign_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'widgets/category1.dart';
@@ -11,6 +14,7 @@ import 'widgets/category1.dart';
 import 'widgets/category2.dart';
 import 'widgets/category3.dart';
 import 'screens/profile_page.dart';
+import 'functioning/networking.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -26,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: LogIn(),
     );
   }
 }
@@ -47,6 +51,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      // body: SignUp(),
       body: screens[currentIndex],
 
       bottomNavigationBar: BottomNavigationBar(
@@ -133,170 +139,190 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.trophy,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Technical Fests",
-                    style: TextStyle(
+              child: GestureDetector(
+                child: Row(  
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.trophy,
                       color: Colors.white,
-                      fontSize: 18,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Technical Fests",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.code,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Hackathons",
-                    style: TextStyle(
+              child: GestureDetector(
+                child: Row( 
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.code,
                       color: Colors.white,
-                      fontSize: 18,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Hackathons",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.newspaper,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Scholarships",
-                    style: TextStyle(
+              child: GestureDetector(
+                child: Row(  
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.newspaper,
                       color: Colors.white,
-                      fontSize: 18,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Scholarships",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.scroll,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Exams",
-                    style: TextStyle(
+              child: GestureDetector(
+                child: Row(  
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.scroll,
                       color: Colors.white,
-                      fontSize: 18,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Exams",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.gear,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Settings",
-                    style: TextStyle(
+              child: GestureDetector(
+                child: Row(  
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.gear,
                       color: Colors.white,
-                      fontSize: 18,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Settings",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.headset,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Ask a Query",
-                    style: TextStyle(
+              child: GestureDetector(
+                child: Row(
+                  children: [ 
+                    FaIcon(
+                      FontAwesomeIcons.headset,
                       color: Colors.white,
-                      fontSize: 18,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Ask a Query",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.circleInfo,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "About Us",
-                    style: TextStyle(
+              child: GestureDetector(
+                child: Row(
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.circleInfo,
                       color: Colors.white,
-                      fontSize: 18,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "About Us",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.rightFromBracket,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Logout",
-                    style: TextStyle(
+              child: GestureDetector(
+              onTap: ()async{
+                await log_out();
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>LogIn()));
+              },
+                child: Row(
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.rightFromBracket,
                       color: Colors.white,
-                      fontSize: 18,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Logout",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
