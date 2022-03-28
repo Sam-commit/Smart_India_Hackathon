@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'widgets/categories.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'functioning/networking.dart';
+import 'profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: HomePage());
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: ProfilePage(),
+    );
   }
 }
 
@@ -29,6 +32,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<dynamic> hackathon_data = [];
+
+  void sol() async {
+    hackathon_data = await get_hackathons();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    sol();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,77 +73,184 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         "Samarth Goel",
-                        style: TextStyle(color: Colors.white,fontSize: 18),
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                      Text("+91 9696969696",style: TextStyle(color: Colors.white,fontSize: 18),)
+                      Text(
+                        "+91 9696969696",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      )
                     ],
                   )
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,bottom: 20),
-              child: Row(children: [
-                FaIcon(FontAwesomeIcons.trophy,color: Colors.white,),
-                SizedBox(width: 10,),
-                Text("Technical Fests",style: TextStyle(color: Colors.white,fontSize: 18,),)
-              ],),
+              padding: const EdgeInsets.only(left: 30, bottom: 20),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.trophy,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Technical Fests",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,bottom: 20),
-              child: Row(children: [
-                FaIcon(FontAwesomeIcons.code,color: Colors.white,),
-                SizedBox(width: 10,),
-                Text("Hackathons",style: TextStyle(color: Colors.white,fontSize: 18,),)
-              ],),
+              padding: const EdgeInsets.only(left: 30, bottom: 20),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.code,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Hackathons",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,bottom: 20),
-              child: Row(children: [
-                FaIcon(FontAwesomeIcons.newspaper,color: Colors.white,),
-                SizedBox(width: 10,),
-                Text("Scholarships",style: TextStyle(color: Colors.white,fontSize: 18,),)
-              ],),
+              padding: const EdgeInsets.only(left: 30, bottom: 20),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.newspaper,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Scholarships",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,bottom: 20),
-              child: Row(children: [
-                FaIcon(FontAwesomeIcons.briefcase,color: Colors.white,),
-                SizedBox(width: 10,),
-                Text("Internships",style: TextStyle(color: Colors.white,fontSize: 18,),)
-              ],),
+              padding: const EdgeInsets.only(left: 30, bottom: 20),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.briefcase,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Internships",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,bottom: 20),
-              child: Row(children: [
-                FaIcon(FontAwesomeIcons.gear,color: Colors.white,),
-                SizedBox(width: 10,),
-                Text("Settings",style: TextStyle(color: Colors.white,fontSize: 18,),)
-              ],),
+              padding: const EdgeInsets.only(left: 30, bottom: 20),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.gear,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Settings",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,bottom: 20),
-              child: Row(children: [
-                FaIcon(FontAwesomeIcons.headset,color: Colors.white,),
-                SizedBox(width: 10,),
-                Text("Ask a Query",style: TextStyle(color: Colors.white,fontSize: 18,),)
-              ],),
+              padding: const EdgeInsets.only(left: 30, bottom: 20),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.headset,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Ask a Query",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,bottom: 20),
-              child: Row(children: [
-                FaIcon(FontAwesomeIcons.circleInfo,color: Colors.white,),
-                SizedBox(width: 10,),
-                Text("About Us",style: TextStyle(color: Colors.white,fontSize: 18,),)
-              ],),
+              padding: const EdgeInsets.only(left: 30, bottom: 20),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.circleInfo,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "About Us",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,bottom: 20),
-              child: Row(children: [
-                FaIcon(FontAwesomeIcons.rightFromBracket,color: Colors.white,),
-                SizedBox(width: 10,),
-                Text("Logout",style: TextStyle(color: Colors.white,fontSize: 18,),)
-              ],),
+              padding: const EdgeInsets.only(left: 30, bottom: 20),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.rightFromBracket,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Logout",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
         ),
@@ -156,7 +279,12 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: ListView(
-        children: [Categories(), Categories()],
+        children: [
+          Categories(
+            name: "Hackathons",
+            data: hackathon_data,
+          )
+        ],
       ),
     );
   }
