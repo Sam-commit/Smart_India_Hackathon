@@ -49,7 +49,10 @@ class MyApp extends StatelessWidget {
   }
 }
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+
+  MainPage({required this.data});
+
+  var data;
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -57,11 +60,20 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int currentIndex=0;
-  final screens = [
-    HomePage(),
-    ChatScreen(),
-    ProfilePage(),
-  ];
+  var data;
+  var screens = [];
+  @override
+  void initState() {
+    super.initState();
+    data = widget.data;
+    screens = [
+      HomePage(data:data,),
+      ChatScreen(),
+      ProfilePage(),
+    ];
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +106,9 @@ class _MainPageState extends State<MainPage> {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({required this.data});
+
+  var data;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -141,11 +155,11 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Samarth Goel",
+                        widget.data["name"],
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Text(
-                        "+91 9696969696",
+                        widget.data["contactNo"],
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       )
                     ],

@@ -190,8 +190,8 @@ class _DetailsState extends State<Details> {
               height: 15,
             ),
             ElevatedButton(onPressed: ()async{
-              await sign_up(widget.name,  age, gender, contact, widget.password, education, widget.email);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
+              var data = await sign_up(widget.name,  age, gender, contact, widget.password, education, widget.email);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage(data: data["user"],)));
             },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(

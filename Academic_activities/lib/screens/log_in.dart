@@ -87,8 +87,8 @@ class _LogInState extends State<LogIn> {
                 height: 30,
               ),
              ElevatedButton(onPressed: ()async{
-              await log_in(email,password);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage()));
+              var data= await log_in(email,password);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage(data: data["user"],)));
              },
                  style: ButtonStyle(
                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(

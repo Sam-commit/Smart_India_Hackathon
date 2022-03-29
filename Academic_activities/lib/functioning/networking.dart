@@ -21,7 +21,6 @@ Future get_data(String name) async {
 
 Future sign_up(String name, String age, String gender, String number,
     String password, String education, String email) async {
-  var client = http.Client();
   print(email);
   http.Response response = await http.post(
       Uri.parse('https://clumsy-coders-sih.herokuapp.com/users/signup'),
@@ -38,9 +37,11 @@ Future sign_up(String name, String age, String gender, String number,
         "education": education
       }));
 
-  print(response.body);
+  //print(response.body);
   var data = jsonDecode(response.body);
   token = data["token"];
+  //print(data);
+  return data;
 }
 
 Future log_in(String email, String password) async {
@@ -58,7 +59,9 @@ Future log_in(String email, String password) async {
 
   print(response.statusCode);
   var data = jsonDecode(response.body);
+  //print(data);
   token = data["token"];
+  return data;
 }
 
 Future log_out() async {
