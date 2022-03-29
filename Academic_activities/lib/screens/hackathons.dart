@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:academic_activities/widgets/my_card1.dart';
 
 class Hackathons extends StatefulWidget {
-
   Hackathons({required this.data});
 
-  List<dynamic>data;
+  List<dynamic> data;
 
   @override
   _HackathonsState createState() => _HackathonsState();
@@ -40,10 +39,15 @@ class _HackathonsState extends State<Hackathons> {
       ),
       body: ListView.builder(
         itemCount: widget.data.length,
-        itemBuilder: (BuildContext context,int index){
-          return MyCard_Hackathon(data: widget.data[index]);
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            //width: MediaQuery.of(context).size.width/2,
+            height: MediaQuery.of(context).size.height/2.75,
+            child: MyCard_Hackathon(
+              data: widget.data[index],
+            ),
+          );
         },
-
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:academic_activities/functioning/networking.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -9,216 +10,23 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+
+  final fieldText = TextEditingController();
+
+  void clearText() {
+    fieldText.clear();
+  }
+
+  var data;
+  Future sol() async{
+    data = await fetch_chat();
+  }
+
+  String message = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: Color(0xFF5264C6),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
-        ),
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage("images/img.jpg"),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Samarth Goel",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                      Text(
-                        "+91 9696969696",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.trophy,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Technical Fests",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.code,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Hackathons",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.newspaper,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Scholarships",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.briefcase,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Internships",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.gear,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Settings",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.headset,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Ask a Query",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.circleInfo,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "About Us",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, bottom: 20),
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.rightFromBracket,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Logout",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
@@ -242,37 +50,73 @@ class _ChatScreenState extends State<ChatScreen> {
           )
         ],
       ),
-     body: Padding(
-       padding: const EdgeInsets.only(left: 18,right: 18,top: 10,bottom: 8),
-       child: Container(
-         decoration: BoxDecoration(
-             color: Color(0xFFE0E5FF),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 8),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              color: Color(0xFFE0E5FF),
+              borderRadius: BorderRadius.circular(12)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: FutureBuilder(
+                  builder: (context, snapshots) {
+                    if (snapshots.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                        itemCount: data["messages"].length,
+                          itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: (data["messages"][index]["by"]=="Admin") ? Colors.blue : Colors.white,
+                                borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 8),
+                                child: Text(data["messages"][index]["message"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                              ),
+                            ),
+                          );
+                          });
+                    }
 
-             borderRadius: BorderRadius.circular(12)
-         ),
-       ),
-     ),
-     bottomNavigationBar: TextFormField(
-       decoration: InputDecoration(
-         prefixIcon: Padding(
-           padding: const EdgeInsets.all(8.0),
-           child: Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-             // mainAxisSize: MainAxisSize.min,
-             children: [Text("Message..."),Icon(Icons.send)],
-           ),
-         ),
-         focusedBorder: OutlineInputBorder(
-           borderSide: BorderSide(
-             color: Colors.grey,
-             width: 1,
-           ),
-         ),
-         enabledBorder: OutlineInputBorder(
-           borderSide: BorderSide(color: Colors.grey, width: 1),
-         ),
-       ),
-     ),
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  future: sol(),
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        onChanged: (value){
+                            message = value;
+                        },
+                        controller: fieldText,
+                      ),
+                    ),
+                  ),
+                  IconButton(onPressed: ()async{
+
+                    await send_chat(message);
+                    clearText();
+                    setState(() {});
+
+                  }, icon: Icon(Icons.send,color: Colors.blue,size: 30,))
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
